@@ -4,19 +4,25 @@ pipeline {
         gradle 'gradle'
         jdk 'jdk17'
     }
+    options {
+        // This is required if you want to clean before build
+        skipDefaultCheckout(true)
+    }
   environment {
         SONAR_TOKEN = credentials('sonar-token') // Jenkins credential ID
-        SONAR_HOST_URL = 'https://682f562ba0474eb779d91a3f-6fa094.node-ap-a1de.iximiuz.com'
+        SONAR_HOST_URL = 'https://68308f6c8c1b3edc072bf40a-c4bff7.node-ap-a1de.iximiuz.com'
         SONAR_SCANER_HOME= tool 'SonarQube'
     }
     stages {
         stage('Git Checkout') {
             steps {
+                cleanWs()
                 git branch: 'develop', url: 'https://github.com/Shopping-App-Services/ad-service.git'
             }
         }
         stage('Build') {
             steps {
+                
                 sh 'chmod +x gradlew'
                 sh './gradlew downloadRepos'
                 sh './gradlew installDist'
@@ -64,7 +70,7 @@ pipeline {
             steps {
                 script {
                     // This step should not normally be used in your script. Consult the inline help for details.
-                   withDockerRegistry(credentialsId: 'fb045f21-4646-4b13-9a81-aae491da4b94', toolName: 'docker') {
+         withDockerRegistry(credentialsId: '20226572-5e4c-4db0-ad81-6762251b3d09', toolName: 'docker') {
                         sh 'ls -latr'
                         sh "docker build -t ad-service ."
                         sh "docker tag ad-service nitesh2611/ad-service:latest "
@@ -74,6 +80,17 @@ pipeline {
             }
         }
     }
-}
+     post {
+        // Clean after build
+        always {
+            cleanWs(cleanWhenNotBuilt: false,
+                    deleteDirs: true,
+                    disableDeferredWipeout: true,
+                    notFailBuild: true,
+                    patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
+                               [pattern: '.propsfile', type: 'EXCLUDE']])
+        }
+    }
 
+}
 
