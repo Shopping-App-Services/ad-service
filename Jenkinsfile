@@ -75,6 +75,7 @@ pipeline {
                         sh "docker build -t ad-service ."
                         sh "docker tag ad-service nitesh2611/ad-service:latest "
                         sh "docker push nitesh2611/ad-service:latest "
+                        sh "docker image prune -af"
                     }
                 }
             }
