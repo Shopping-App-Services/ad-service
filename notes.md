@@ -12,3 +12,4 @@ sudo chown -R jenkins:jenkins /var/lib/jenkins/go
 
 Nodejs
 sudo chown -R jenkins:jenkins /var/lib/jenkins/workspace/payment-service-ci/node_modules/pprof
+ sudo apt-get install -y build-essential
