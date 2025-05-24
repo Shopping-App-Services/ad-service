@@ -8,3 +8,7 @@ sudo chown -R jenkins:jenkins /var/lib/jenkins/.sonar
 
 sudo mkdir -p /var/lib/jenkins/go
 sudo chown -R jenkins:jenkins /var/lib/jenkins/go
+
+
+Nodejs
+sudo chown -R jenkins:jenkins /var/lib/jenkins/workspace/payment-service-ci/node_modules/pprof
