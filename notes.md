@@ -1,10 +1,10 @@
-mkdir -p /home/jenkins/.gradle/wrapper/dists
-chown -R jenkins:jenkins /home/jenkins/.gradle
+sudo mkdir -p /var/lib/jenkins/.gradle/wrapper/dists
+sudo chown -R jenkins:jenkins /var/lib/jenkins/.gradle
 
 When Sonarqube unable to create cache
 
-sudo mkdir -p /home/jenkins/.sonar/cache
-sudo chown -R jenkins:jenkins /home/jenkins/.sonar
+sudo mkdir -p /var/lib/jenkins/.sonar/cache
+sudo chown -R jenkins:jenkins /var/lib/jenkins/.sonar
 
-sudo mkdir -p /home/jenkins/go
-sudo chown -R jenkins:jenkins /home/jenkins/go
+sudo mkdir -p /var/lib/jenkins/go
+sudo chown -R jenkins:jenkins /var/lib/jenkins/go
