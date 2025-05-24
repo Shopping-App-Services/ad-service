@@ -70,7 +70,7 @@ pipeline {
             steps {
                 script {
                     // This step should not normally be used in your script. Consult the inline help for details.
-         withDockerRegistry(credentialsId: '20226572-5e4c-4db0-ad81-6762251b3d09', toolName: 'docker') {
+         withDockerRegistry(credentialsId: 'docker-token', toolName: 'docker') {
                         sh 'ls -latr'
                         sh "docker build -t ad-service ."
                         sh "docker tag ad-service nitesh2611/ad-service:latest "
